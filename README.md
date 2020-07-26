@@ -12,6 +12,8 @@ the code word with corresponding character. Code words follow prefix property wh
 codeword can't be a prefix of other codeword so, uniqueness is maintained.
 
 
+
+
 Algorithm:
 
 Input – A text string str
@@ -79,6 +81,8 @@ for i in range(0,N-1) do
 result <-- result + resulti
 
 end for
+
+
 
 
 
