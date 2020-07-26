@@ -17,8 +17,11 @@ Algorithm:
 Input – A text string str
 
 Number of characters in input string = n
+
 Number of processors = N
+
 Processor Model – EREW SM SIMD 
+
 Output – A compressed string result Procedure parallel compression(str,result) 
 
 Step 1: for i in 0 to N-1 do in parallel
@@ -26,11 +29,15 @@ Step 1: for i in 0 to N-1 do in parallel
 Each P[i] computes
 
 1.1	Lowi <-- ceiling(n/N)*i
+
 1.2	Highi <-- min(ceiling(n/N)*(i+1),n )
+
 1.3	For j in range low to high do
 
 Tempi <-- tempi + codeword(str[j]) #temp stores intermediate result
+
     end for
+    
 end for
 
 Step 2:processor P[0]
@@ -42,20 +49,33 @@ end for
 Step 3: for i in 0 to N-1 do in parallel
 
 Each P[i] computes
+
 3.1	Lowi <-- ceiling(m/N)*i	              #m=length(temp)
+
 3.2	Highi <-- min(ceiling(m/N)*(i+1),m)
+
 3.3	octatei <-- Low +(ceiling(High -Low)/8)*8
-3.4	for j in range (0,f,8) do resulti <-- resulti + chr(tmp[j:j+8])
+
+3.4	for j in range (0,f,8) do 
+
+resulti <-- resulti + chr(tmp[j:j+8])
+
 End for
+
 3.5	if m > f then
+
 resulti <-- resulti + chr(tmp[f:m])
+
 End if
+
 end for
 
 Step 4:processor P[0]
 
 for i in range(0,N-1) do 
+
 result <-- result + resulti
+
 end for
 
 
@@ -65,9 +85,11 @@ Timing analysis:
 step 1.1 ,1.2 and 1.3 takes constant time.
 
 Step 1.4 will take n/N time since it string length of size n/N step 2 is bottleneck and takes n
+
 step 3.1 3.2 and 3.3 takes constant time
 
 step 3.4 take m/N time in processing string length of size m/N step 3.5 take constant time
+
 step 4 take m/8 time (bottleneck)
 
 Total complexity T(n) = O(max(n,m/8)) =O(n) since compressed string will always be less then original string.
