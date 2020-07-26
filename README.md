@@ -43,7 +43,9 @@ end for
 Step 2:processor P[0]
 
 for i in range(0,N-1) do 
+
 temp <-- temp + tempi
+
 end for
 
 Step 3: for i in 0 to N-1 do in parallel
